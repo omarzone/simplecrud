@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlumnoController;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +15,7 @@ use App\Http\Controllers\AlumnoController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 //Llmar a una vista apuntando a su blade.php
@@ -27,5 +28,16 @@ Route::get('/', function () {
 
 
 //Genera todas las urls en funcion de las funciones del controlador
-Route::resource('alumno',AlumnoController::class);
+Route::resource('alumno',AlumnoController::class)->middleware('auth');
 
+// Auth::routes(['register'=>false,'reset'=> false]);
+
+Auth::routes();
+
+Route::get('/home', [AlumnoController::class, 'index'])->name('home');
+
+
+
+Route::group(['middleware'=> 'auth'], function(){
+    Route::get('/', [AlumnoController::class, 'index'])->name('home');
+});

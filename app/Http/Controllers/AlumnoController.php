@@ -14,7 +14,8 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        return view('alumno.index');
+        $datos['alumnos']= Alumno::paginate(5);
+        return view('alumno.index', $datos);
     }
 
     /**
@@ -35,7 +36,10 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datosAlumno = request()->except('_token');
+        Alumno::insert($datosAlumno);
+        return redirect('alumno')->with('mensaje','Alumno agregado con exito');
+
     }
 
     /**
@@ -55,9 +59,11 @@ class AlumnoController extends Controller
      * @param  \App\Models\Alumno  $alumno
      * @return \Illuminate\Http\Response
      */
-    public function edit(Alumno $alumno)
+    public function edit($id)
     {
-        return view('alumno.edit');
+        $alumno = Alumno::findOrFail($id);
+        return view('alumno.edit', compact('alumno'));
+       
     }
 
     /**
@@ -67,9 +73,17 @@ class AlumnoController extends Controller
      * @param  \App\Models\Alumno  $alumno
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Alumno $alumno)
+    public function update(Request $request, $id)
     {
-        //
+        $datosAlumno = request()->except('_token','_method');
+        
+        Alumno::where('id','=', $id)->update($datosAlumno);
+        
+
+        $alumno = Alumno::findOrFail($id);
+        // return view('alumno.edit', compact('alumno'));
+        return redirect('alumno')->with('mensaje','Alumno modificado con exito');
+
     }
 
     /**
@@ -78,8 +92,9 @@ class AlumnoController extends Controller
      * @param  \App\Models\Alumno  $alumno
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Alumno $alumno)
+    public function destroy($id)
     {
-        //
+        Alumno::destroy($id);
+        return redirect('alumno')->with('mensaje','Alumno eliminado con exito');
     }
 }
