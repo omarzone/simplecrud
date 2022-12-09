@@ -1,0 +1,66 @@
+.header{
+    background-color: #435d7d;
+    color: white;
+    border-radius: 4px;
+}
+
+.title{
+    width: 400px;
+    float:inline-start;
+}
+
+.color{
+    color:white;
+    font-size: xx-large;
+}
+
+
+.img-delete{
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+}
+
+.button-delete{
+    background-color: red;
+    color:white;
+    border-color: transparent;
+    border-radius: 4px;
+}
+
+
+.img-add{
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    
+}
+
+.button-add{
+    background-color: green;
+    color:white;
+    border-color: transparent;
+    border-radius: 4px;
+}
+
+.separator{
+    width: 15px;
+}
+
+
+.select-all{
+    width: 200px;
+}
+
+.img-edit{
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+}
+
+.button-edit{
+    background-color: green;
+    color:white;
+    border-color: transparent;
+    border-radius: 4px;
+}
