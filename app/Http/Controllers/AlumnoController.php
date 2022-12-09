@@ -14,7 +14,7 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        $datos['alumnos']= Alumno::paginate(5);
+        $datos['alumnos'] = Alumno::paginate(5);
         return view('alumno.index', $datos);
     }
 
@@ -38,7 +38,7 @@ class AlumnoController extends Controller
     {
         $datosAlumno = request()->except('_token');
         Alumno::insert($datosAlumno);
-        return redirect('alumno')->with('mensaje','Alumno agregado con exito');
+        return redirect('alumno')->with('mensaje', 'Alumno agregado con exito');
 
     }
 
@@ -63,7 +63,7 @@ class AlumnoController extends Controller
     {
         $alumno = Alumno::findOrFail($id);
         return view('alumno.edit', compact('alumno'));
-       
+
     }
 
     /**
@@ -75,14 +75,14 @@ class AlumnoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datosAlumno = request()->except('_token','_method');
-        
-        Alumno::where('id','=', $id)->update($datosAlumno);
-        
+        $datosAlumno = request()->except('_token', '_method');
+
+        Alumno::where('id', '=', $id)->update($datosAlumno);
+
 
         $alumno = Alumno::findOrFail($id);
         // return view('alumno.edit', compact('alumno'));
-        return redirect('alumno')->with('mensaje','Alumno modificado con exito');
+        return redirect('alumno')->with('mensaje', 'Alumno modificado con exito');
 
     }
 
@@ -95,6 +95,14 @@ class AlumnoController extends Controller
     public function destroy($id)
     {
         Alumno::destroy($id);
-        return redirect('alumno')->with('mensaje','Alumno eliminado con exito');
+        return redirect('alumno')->with('mensaje', 'Alumno eliminado con exito');
+    }
+
+
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        Alumno::whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['success'=>"Registros eliminados con exito"]);
     }
 }

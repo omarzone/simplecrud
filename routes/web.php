@@ -38,6 +38,10 @@ Route::get('/home', [AlumnoController::class, 'index'])->name('home');
 
 
 
+Route::delete('/deleteAll',[AlumnoController::class, 'deleteAll'])->name('deleteAll');
+
+
+
 Route::group(['middleware'=> 'auth'], function(){
     Route::get('/', [AlumnoController::class, 'index'])->name('home');
 });

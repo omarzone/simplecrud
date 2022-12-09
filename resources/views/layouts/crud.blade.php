@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS only -->
@@ -18,7 +19,7 @@
             <div class="container-fluid header">
                 <h1 class="navbar-brand color">Gestión de alumnos</h1>
                 <div class="d-flex" role="actions" >
-                    <a href = "#"class="btn btn-danger"><img src="{{ asset('imgs/delete (1).png') }}" class="img-delete" id="button-delete" name="button-delete"> Eliminar</a>
+                    <a href = "#"class="btn btn-danger delete_all"><img src="{{ asset('imgs/delete (1).png') }}" class="img-delete" id="button-delete" name="button-delete" data-url="{{ url('/deleteAll') }}"> Eliminar</a>
                     <div class="separator"></div>
                     <a href="{{ url('alumno/create') }}" class="btn btn-success"><img src="{{ asset('imgs/plus.png') }}" class="img-add" id="button-add" name="button-add"> añadir nuevo alumno</a>
                 </div>
